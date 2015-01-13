@@ -6,7 +6,7 @@
 /*   By: jumiguel <jumiguel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 16:52:38 by jumiguel          #+#    #+#             */
-/*   Updated: 2015/01/12 21:03:58 by jumiguel         ###   ########.fr       */
+/*   Updated: 2015/01/13 16:02:29 by jumiguel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ int	main(int ac, char **av)
 		y++;
 	}
 	close (fd);
+	display(list);
 	return (0);
 }

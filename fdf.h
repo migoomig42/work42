@@ -6,7 +6,7 @@
 /*   By: jumiguel <jumiguel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 14:34:13 by jumiguel          #+#    #+#             */
-/*   Updated: 2015/01/12 21:03:52 by jumiguel         ###   ########.fr       */
+/*   Updated: 2015/01/13 19:46:52 by jumiguel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,15 @@ typedef struct			s_env
 	void	*win;
 }						t_env;
 
+typedef struct			s_size
+{
+	int		xmin;
+	int		ymin;
+	int		xmax;
+	int		ymax;
+}						t_size;
+
 t_list		*ft_add_list(t_list *list, char *str, int y);
+void		display(t_list *list);
+void		draw(void *mlx, void *win, t_list *list);
 #endif
