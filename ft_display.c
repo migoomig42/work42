@@ -6,7 +6,7 @@
 /*   By: jumiguel <jumiguel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 19:53:37 by jumiguel          #+#    #+#             */
-/*   Updated: 2015/01/13 19:46:56 by jumiguel         ###   ########.fr       */
+/*   Updated: 2015/01/20 19:33:05 by jumiguel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,30 @@ void	draw(void *mlx, void *win, t_list *list)
 	}
 }
 
+int		key_hook(int keycode)
+{
+	if (keycode == 65307)
+		exit (0);
+	return (0);
+}
+
+int		expose_hook(t_env *env)
+{
+	draw(env->mlx, env->win, env->list);
+	return (0);
+}
+
 void	display(t_list *list)
 {
 	t_env	var;
+	t_size	*size;
 
+	*size = scaling_my_baby(list);
 	var.mlx = mlx_init();
-	var.win = mlx_new_window(var.mlx, 420, 420, "42");
-//	mlx_loop(var.mlx);
+	var.list = list;
+	var.win = mlx_new_window(var.mlx, size->xmax, size->ymax, "42");
+	mlx_key_hook(var.win, key_hook, &var);
 	draw(var.mlx, var.win, list);
-	sleep(45);
+	mlx_expose_hook(var.win, expose_hook, &var);
+	mlx_loop(var.mlx);
 }

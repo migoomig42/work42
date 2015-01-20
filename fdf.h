@@ -6,12 +6,13 @@
 /*   By: jumiguel <jumiguel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 14:34:13 by jumiguel          #+#    #+#             */
-/*   Updated: 2015/01/13 19:46:52 by jumiguel         ###   ########.fr       */
+/*   Updated: 2015/01/20 19:34:28 by jumiguel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
+# define MAX 1000
 
 #include "libft/includes/libft.h"
 #include <mlx.h>
@@ -38,6 +39,7 @@ typedef struct			s_env
 {
 	void	*mlx;
 	void	*win;
+	t_list	*list;
 }						t_env;
 
 typedef struct			s_size
@@ -46,9 +48,12 @@ typedef struct			s_size
 	int		ymin;
 	int		xmax;
 	int		ymax;
+	int		pad;
 }						t_size;
 
 t_list		*ft_add_list(t_list *list, char *str, int y);
 void		display(t_list *list);
 void		draw(void *mlx, void *win, t_list *list);
+t_size		*scaling_my_baby(t_point *point, t_list *list);
+
 #endif
