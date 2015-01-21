@@ -6,7 +6,7 @@
 /*   By: jumiguel <jumiguel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/13 16:59:47 by jumiguel          #+#    #+#             */
-/*   Updated: 2015/01/21 15:33:12 by jumiguel         ###   ########.fr       */
+/*   Updated: 2015/01/21 15:39:31 by jumiguel         ###   ########.fr       */
 	/*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,5 @@ t_size		*scaling_my_baby(t_point *point, t_list *list)
 		min_max->pad = MAX / min_max->xmax;
 	else
 		min_max->pad =  MAX / min_max->ymax;
-	ft_putnbr(min_max->pad);
-	ft_putchar('\n');
 	return (min_max);
 }
