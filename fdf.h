@@ -6,7 +6,7 @@
 /*   By: jumiguel <jumiguel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 14:34:13 by jumiguel          #+#    #+#             */
-/*   Updated: 2015/01/20 19:34:28 by jumiguel         ###   ########.fr       */
+/*   Updated: 2015/01/21 15:33:22 by jumiguel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,6 @@ typedef struct			s_list
 	struct s_list	*next;
 }						t_list;
 
-typedef struct			s_env
-{
-	void	*mlx;
-	void	*win;
-	t_list	*list;
-}						t_env;
-
 typedef struct			s_size
 {
 	int		xmin;
@@ -51,9 +44,18 @@ typedef struct			s_size
 	int		pad;
 }						t_size;
 
+typedef struct			s_env
+{
+	void	*mlx;
+	void	*win;
+	t_list	*list;
+	t_size	*size;
+}						t_env;
+
+
 t_list		*ft_add_list(t_list *list, char *str, int y);
 void		display(t_list *list);
-void		draw(void *mlx, void *win, t_list *list);
+void		draw(void *mlx, void *win, t_list *list, t_size *size);
 t_size		*scaling_my_baby(t_point *point, t_list *list);
 
 #endif

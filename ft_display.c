@@ -6,24 +6,27 @@
 /*   By: jumiguel <jumiguel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 19:53:37 by jumiguel          #+#    #+#             */
-/*   Updated: 2015/01/20 19:33:05 by jumiguel         ###   ########.fr       */
+/*   Updated: 2015/01/21 15:33:16 by jumiguel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw(void *mlx, void *win, t_list *list)
+void	draw(void *mlx, void *win, t_list *list, t_size *size)
 {
 	t_list		*temp;
 	t_point		*temp2;
 
+	ft_putstr("4: ");
+	ft_putnbr(size->pad);
+	ft_putchar('\n');
 	temp = list;
 	while (temp)
 	{
 		temp2 = temp->point;
 		while (temp2)
 		{
-			mlx_pixel_put(mlx, win, temp2->x * 10, temp2->y * 10, 0xFFFFFF);
+			mlx_pixel_put(mlx, win, temp2->x * size->pad, temp2->y * size->pad, 0xFFFFFF);
 			temp2 = temp2->next;
 		}
 		temp = temp->next;
@@ -39,7 +42,7 @@ int		key_hook(int keycode)
 
 int		expose_hook(t_env *env)
 {
-	draw(env->mlx, env->win, env->list);
+	draw(env->mlx, env->win, env->list, env->size);
 	return (0);
 }
 
@@ -48,12 +51,23 @@ void	display(t_list *list)
 	t_env	var;
 	t_size	*size;
 
-	*size = scaling_my_baby(list);
+	size = NULL;
 	var.mlx = mlx_init();
 	var.list = list;
-	var.win = mlx_new_window(var.mlx, size->xmax, size->ymax, "42");
+	size = scaling_my_baby(list->point, list);
+	var.size = size;
+	ft_putstr("1: ");
+	ft_putnbr(var.size->pad);
+	ft_putchar('\n');
+	var.win = mlx_new_window(var.mlx, var.size->pad * var.size->xmax, var.size->pad * var.size->ymax, "42");
+	ft_putstr("2: ");
+	ft_putnbr(var.size->pad);
+	ft_putchar('\n');
 	mlx_key_hook(var.win, key_hook, &var);
-	draw(var.mlx, var.win, list);
+	ft_putstr("3: ");
+	ft_putnbr(var.size->pad);
+	ft_putchar('\n');
+	draw(var.mlx, var.win, list, var.size);
 	mlx_expose_hook(var.win, expose_hook, &var);
 	mlx_loop(var.mlx);
 }

@@ -6,14 +6,18 @@
 /*   By: jumiguel <jumiguel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/13 16:59:47 by jumiguel          #+#    #+#             */
-/*   Updated: 2015/01/20 19:34:25 by jumiguel         ###   ########.fr       */
+/*   Updated: 2015/01/21 15:33:12 by jumiguel         ###   ########.fr       */
 	/*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
-t_size		*ft_init_value(t_size *size, t_point *point)
+t_size		*ft_init_value(t_point *point)
 {
+	t_size *size;
+
+	size = NULL;
 	if ((size = (t_size *)malloc(sizeof(*size))))
 	{
 		size->xmin = point->x;
@@ -42,7 +46,7 @@ t_size		*scaling_my_baby(t_point *point, t_list *list)
 	t_point *temp2;
 	t_size	*min_max;
 
-	min_max = ft_init_value(min_max, point);
+	min_max = ft_init_value(point);
 	temp = list;
 	while (temp)
 	{
@@ -58,5 +62,7 @@ t_size		*scaling_my_baby(t_point *point, t_list *list)
 		min_max->pad = MAX / min_max->xmax;
 	else
 		min_max->pad =  MAX / min_max->ymax;
+	ft_putnbr(min_max->pad);
+	ft_putchar('\n');
 	return (min_max);
 }
