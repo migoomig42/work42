@@ -6,7 +6,7 @@
 /*   By: jumiguel <jumiguel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 14:34:13 by jumiguel          #+#    #+#             */
-/*   Updated: 2015/01/21 15:33:22 by jumiguel         ###   ########.fr       */
+/*   Updated: 2015/01/21 16:11:37 by jumiguel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,17 @@ typedef struct			s_env
 	t_size	*size;
 }						t_env;
 
+typedef struct			s_draw
+{
+	int		dx;
+	int		dy;
+	int		i;
+	int		xinc;
+	int		yinc;
+	int		cumul;
+	int		x;
+	int		y;
+}						t_draw;
 
 t_list		*ft_add_list(t_list *list, char *str, int y);
 void		display(t_list *list);
