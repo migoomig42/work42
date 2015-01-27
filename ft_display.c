@@ -6,40 +6,24 @@
 /*   By: jumiguel <jumiguel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 19:53:37 by jumiguel          #+#    #+#             */
-/*   Updated: 2015/01/21 15:40:06 by jumiguel         ###   ########.fr       */
+/*   Updated: 2015/01/27 18:33:41 by jumiguel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw(void *mlx, void *win, t_list *list, t_size *size)
+int		key_hook(int keycode, t_env *env)
 {
-	t_list		*temp;
-	t_point		*temp2;
-
-	temp = list;
-	while (temp)
-	{
-		temp2 = temp->point;
-		while (temp2)
-		{
-			mlx_pixel_put(mlx, win, temp2->x * size->pad, temp2->y * size->pad, 0xFFFFFF);
-			temp2 = temp2->next;
-		}
-		temp = temp->next;
-	}
-}
-
-int		key_hook(int keycode)
-{
+	(void)env;
 	if (keycode == 65307)
 		exit (0);
+	ft_putnbr(keycode);
 	return (0);
 }
 
 int		expose_hook(t_env *env)
 {
-	draw(env->mlx, env->win, env->list, env->size);
+	final_fantasy(env->list, env);
 	return (0);
 }
 
@@ -55,7 +39,6 @@ void	display(t_list *list)
 	var.size = size;
 	var.win = mlx_new_window(var.mlx, var.size->pad * var.size->xmax, var.size->pad * var.size->ymax, "42");
 	mlx_key_hook(var.win, key_hook, &var);
-	draw(var.mlx, var.win, list, var.size);
 	mlx_expose_hook(var.win, expose_hook, &var);
 	mlx_loop(var.mlx);
 }

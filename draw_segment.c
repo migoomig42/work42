@@ -6,11 +6,12 @@
 /*   By: jumiguel <jumiguel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/21 16:05:58 by jumiguel          #+#    #+#             */
-/*   Updated: 2015/01/21 18:12:01 by jumiguel         ###   ########.fr       */
+/*   Updated: 2015/01/27 18:33:30 by jumiguel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 void	draw_x(t_draw *dw, t_env *env, t_size *size)
 {
@@ -48,14 +49,15 @@ void	draw_y(t_draw *dw, t_env *env, t_size *size)
 	}
 }
 
-void	draw_seg(t_point i, t_point f, t_env *env, t_size *size)
+void	draw_seg(t_point *i, t_point *f, t_env *env, t_size *size)
 {
 	t_draw	*dw;
 
-	dw->x = i.x;
-	dw->y = i.y;
-	dw->dx = f.x - i.x;
-	dw->dy = f.y - i.y;
+	dw = NULL;
+	dw->x = i->x;
+	dw->y = i->y;
+	dw->dx = f->x - i->x;
+	dw->dy = f->y - i->y;
 	dw->xinc = (dw->dx > 0) ? 1 : -1;
 	dw->yinc = (dw->dy > 0) ? 1 : -1;
 	dw->dx = abs(dw->dx);
@@ -67,4 +69,29 @@ void	draw_seg(t_point i, t_point f, t_env *env, t_size *size)
 		draw_y(dw, env, size);
 }
 
+void	final_fantasy(t_list *list, t_env *env)
+{
+	t_list	*temp;
+	t_point	*temp2;
+	t_point	*temp3;
 
+	temp = list;
+	while (temp)
+	{
+		temp2 = temp->point;
+		if (temp->next != NULL)
+			temp3 = temp->next->point;
+		while (temp2)
+		{
+			if (temp2->next)
+				ligne(temp2->x * env->size->pad, temp2->y * env->size->pad, temp2->next->x * env->size->pad, temp2->next->y * env->size->pad, env);
+			if (temp3)
+			{
+				ligne(temp2->x * env->size->pad, temp2->y * env->size->pad, temp3->x * env->size->pad, temp3->y * env->size->pad, env);
+				temp3 = temp3->next;
+			} 
+			temp2 = temp2->next;
+		}
+		temp = temp->next;
+	}
+}
